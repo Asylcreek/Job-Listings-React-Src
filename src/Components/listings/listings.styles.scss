@@ -1,0 +1,33 @@
+//////Variables
+//Colors
+$color-desaturated-dark-cyan: #5ba4a4;
+$color-light-grayish-cyan-bg: #effafa;
+$color-light-grayish-cyan-filter: #eef6f6;
+$color-dark-grayish-cyan: #7b8e8e;
+$color-very-dark-grayish-cyan: #2c3a3a;
+//Font
+$display-font: "Spartan",
+sans-serif;
+//Breakpoints
+$bp-large: 69.375em;
+$bp-medium: 56.25em;
+$bp-small: 31.25em;
+$bp-smallest: 25em;
+//
+.main {
+    max-width: 85vw;
+    margin: 0 auto;
+    position: relative;
+}
+
+//
+.listings {
+    min-height: 80vh;
+    margin-top: 7rem;
+    @media only screen and (max-width: $bp-small) {
+        margin-top: 10rem;
+    }
+    @media only screen and (max-width: $bp-smallest) {
+        margin-top: 13rem;
+    }
+}

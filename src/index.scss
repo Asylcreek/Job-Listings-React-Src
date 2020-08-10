@@ -1,0 +1,44 @@
+//////Variables
+//Colors
+$color-desaturated-dark-cyan: #5ba4a4;
+$color-light-grayish-cyan-bg: #effafa;
+$color-light-grayish-cyan-filter: #eef6f6;
+$color-dark-grayish-cyan: #7b8e8e;
+$color-very-dark-grayish-cyan: #2c3a3a;
+//Font
+$display-font: "Spartan",
+sans-serif;
+//Breakpoints
+$bp-large: 69.375em;
+$bp-medium: 56.25em;
+$bp-small: 31.25em;
+$bp-smallest: 25em;
+//////Styles
+//General Reset
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; //1rem = 10px
+    @media only screen and (max-width: $bp-small) {
+        font-size: 50%;
+    }
+}
+
+body {
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: $display-font;
+    line-height: 1.5;
+    background-color: $color-light-grayish-cyan-bg;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
