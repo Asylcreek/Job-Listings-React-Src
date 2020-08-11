@@ -12,6 +12,9 @@ function App() {
 
   const [filters, setFilters] = React.useState([]);
 
+  //This stores the values of the previous filter item
+  const [oldValues, setOldValues] = React.useState([]);
+
   const handleClick = (event) => {
     //Get filter
     const filter = event.target.innerText;
@@ -32,21 +35,37 @@ function App() {
           values.push(...value);
         }
       });
+
       return values.includes(filter);
     });
 
-    setJobListings(filteredJobListings);
+    //Update the jobListings array
+    setJobListings(() => filteredJobListings);
+
+    //Update the oldValues array
+    setOldValues((previousValues) => [...previousValues, jobListings]);
   };
 
   const handleFilterDeleteClick = (event) => {
+    //Get filter name from event
     const currentFilter = event.target.dataset.filter;
 
+    //Remove filter from filters array
     const newFilters = filters.filter((filter) => filter !== currentFilter);
 
+    //Update the filter array
     setFilters(newFilters);
+
+    //Remove the last item from the oldValues array and update the oldValues array
+    const values = oldValues.slice(0, -1);
+    setOldValues(values);
+
+    //Update the jobListings array with the last value in the oldValues array
+    setJobListings(oldValues[oldValues.length - 1]);
   };
 
   const handleFilterClearClick = () => {
+    //Clear all the filters and return the jobListings array to its original state
     setFilters([]);
     setJobListings(data);
   };
