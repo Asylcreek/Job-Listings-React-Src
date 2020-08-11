@@ -1,0 +1,52 @@
+//////Variables
+//Colors
+$color-desaturated-dark-cyan: #5ba4a4;
+$color-light-grayish-cyan-bg: #effafa;
+$color-light-grayish-cyan-filter: #eef6f6;
+$color-dark-grayish-cyan: #7b8e8e;
+$color-very-dark-grayish-cyan: #2c3a3a;
+//Font
+$display-font: "Spartan",
+sans-serif;
+//Breakpoints
+$bp-large: 69.375em;
+$bp-medium: 56.25em;
+$bp-small: 31.25em;
+$bp-smallest: 25em;
+//
+.filter {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $color-dark-grayish-cyan;
+    display: flex;
+    @media only screen and (max-width: $bp-medium) {
+        margin-bottom: 1rem;
+    }
+    &:not(:last-child) {
+        margin-right: 1.1rem;
+    }
+    &__text {
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        padding: 0.6rem 1rem;
+        background-color: $color-light-grayish-cyan-filter;
+    }
+    &__delete {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        &__container {
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            padding: 0.5rem 1.5rem;
+            background-color: $color-desaturated-dark-cyan;
+            position: relative;
+            transition: background-color 0.2s;
+            &:hover {
+                cursor: pointer;
+                background-color: $color-very-dark-grayish-cyan;
+            }
+        }
+    }
+}

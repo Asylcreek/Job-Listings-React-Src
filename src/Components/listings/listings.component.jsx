@@ -8,7 +8,13 @@ const Listings = (props) => {
   return (
     <main className='main'>
       <div className='listings'>
-        <Listing />
+        {props.listings.map((listing) => (
+          <Listing
+            key={listing.id}
+            {...listing}
+            handleClick={props.handleClick}
+          />
+        ))}
       </div>
     </main>
   );
