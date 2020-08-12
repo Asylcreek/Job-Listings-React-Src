@@ -7,12 +7,16 @@ const Filter = (props) => {
   return (
     <div className='filter'>
       <p className='filter__text'>{props.filter}</p>
-      <div className='filter__delete__container'>
+      <div
+        className='filter__delete__container'
+        data-filter={props.filter}
+        onClick={props.handleFilterDeleteClick}
+      >
         <img
           src={LogoDelete}
-          data-filter={props.filter}
           alt='remove button'
           className='filter__delete'
+          data-filter={props.filter}
           onClick={props.handleFilterDeleteClick}
         />
       </div>

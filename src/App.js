@@ -7,16 +7,35 @@ import Filters from "./Components/filters/filters.component";
 import Listings from "./Components/listings/listings.component";
 import Footer from "./Components/footer/footer.component";
 
+//Function that takes an array of objects, maybe a filterArray or a filterItem and returns an array of objects that have filterKey/items in filterArray in them
+const filterArrayOfObjects = (array, filterArray, filterItem) =>
+  array.filter((element) => {
+    //Get all the values in the object
+    const values = Object.values(element);
+
+    //Check if a value is an array an spread it into the values list
+    values.forEach((value) => {
+      if (Array.isArray(value)) {
+        values.push(...value);
+      }
+    });
+
+    //If filterArray is provided, check if all the items in the filterArray are in the values array
+    if (filterArray) return filterArray.every((el) => values.includes(el));
+
+    return values.includes(filterItem);
+  });
+
 function App() {
+  //Initialize jobListings state and its setState function
   const [jobListings, setJobListings] = React.useState(data);
 
+  //Initialize filters state and its setState function
   const [filters, setFilters] = React.useState([]);
 
-  //This stores the values of the previous filter item
-  const [oldValues, setOldValues] = React.useState([]);
-
+  //To handle clicking of any of the tags
   const handleClick = (event) => {
-    //Get filter
+    //Get filter from event
     const filter = event.target.innerText;
 
     //Check if filter is already in list, if not, add it to the list
@@ -24,28 +43,14 @@ function App() {
       setFilters((previousValues) => [...previousValues, filter]);
     }
 
-    //Filter the jobListings with the filters array
-    const filteredJobListings = jobListings.filter((jobListing) => {
-      //Save all the values of the keys into an array
-      const values = Object.values(jobListing);
+    //Use filter to filter jobListings
+    const filteredJobListings = filterArrayOfObjects(jobListings, null, filter);
 
-      //Check if a value is an array an spread it into the values list
-      values.forEach((value) => {
-        if (Array.isArray(value)) {
-          values.push(...value);
-        }
-      });
-
-      return values.includes(filter);
-    });
-
-    //Update the jobListings array
-    setJobListings(() => filteredJobListings);
-
-    //Update the oldValues array
-    setOldValues((previousValues) => [...previousValues, jobListings]);
+    //Update jobListings
+    setJobListings(filteredJobListings);
   };
 
+  //To handle clicking of the delete button on a filter
   const handleFilterDeleteClick = (event) => {
     //Get filter name from event
     const currentFilter = event.target.dataset.filter;
@@ -56,12 +61,11 @@ function App() {
     //Update the filter array
     setFilters(newFilters);
 
-    //Remove the last item from the oldValues array and update the oldValues array
-    const values = oldValues.slice(0, -1);
-    setOldValues(values);
+    //Use the newFilters array to filter the original data
+    const filteredListings = filterArrayOfObjects(data, newFilters);
 
-    //Update the jobListings array with the last value in the oldValues array
-    setJobListings(oldValues[oldValues.length - 1]);
+    //Update jobListings
+    setJobListings(filteredListings);
   };
 
   const handleFilterClearClick = () => {
