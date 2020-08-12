@@ -29,7 +29,7 @@ const Listing = (props) => {
   const logoSrc = logos.filter((logo) => logo.includes(props.logo));
 
   return (
-    <div className='listing'>
+    <div className={`listing ${props.featured ? "listing--colored-side" : ""}`}>
       <div className='listing__container'>
         <img
           src={logoSrc[0][0]}
