@@ -57,12 +57,7 @@ const Listing = (props) => {
       <div className='listing__tags'>
         {[props.role, props.level, ...props.languages, ...props.tools].map(
           (item, index) => (
-            <p
-              className='listing__tag'
-              key={index}
-              name={item}
-              onClick={props.handleClick}
-            >
+            <p className='listing__tag' key={index} onClick={props.handleClick}>
               {item}
             </p>
           )
